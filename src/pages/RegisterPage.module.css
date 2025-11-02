@@ -1,0 +1,13 @@
+.card {
+  max-width: 28rem;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+/* ... (sisa kode CSS) ... */
+.text {
+  text-align: center;
+  color: #4b5563; /* text-gray-600 */
+}

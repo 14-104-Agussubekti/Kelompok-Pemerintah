@@ -1,0 +1,12 @@
+.card {
+  max-width: 32rem; /* max-w-lg */
+  margin: auto;
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+/* ... (sisa kode CSS) ... */
+.fileInput::file-selector-button:hover {
+  background-color: #dbeafe; /* hover:bg-blue-100 */
+}

@@ -1,0 +1,96 @@
+/*
+ * File CSS untuk Dashboard Masyarakat
+ * Diperbarui dengan variabel warna baru dan layout tabel
+ */
+
+.card {
+  background: var(--color-bg-card);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: 2rem;
+  width: 100%;
+  border: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+}
+
+.title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: var(--color-text-dark); /* Cokelat Kayu */
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+}
+
+/* Menghapus style .list dan .item yang lama */
+
+.emptyText {
+  color: var(--color-text-light);
+  text-align: center;
+  padding: 2rem;
+  font-style: italic;
+}
+
+/* --- STYLE TABEL BARU --- */
+/* (Mirip dengan AdminDashboard.module.css) */
+
+.tableWrapper {
+  overflow: hidden; 
+  border: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%; /* min-w-full */
+  border-collapse: collapse;
+}
+
+.tableHead {
+  background-color: var(--color-bg-main); /* Latar Jerami Super Terang */
+}
+
+.tableHead th {
+  padding: 0.75rem 1.5rem; /* px-6 py-3 */
+  text-align: left;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  color: var(--color-text-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+  border-left: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+}
+
+/* TAMBAH: selector untuk th pertama agar tidak ada border ganda */
+.tableHead th:first-child {
+  border-left: none;
+}
+
+.tableBody {
+  background-color: var(--color-bg-card);
+}
+.tableBody tr {
+  border-bottom: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+}
+.tableBody tr:last-child {
+  border-bottom: none;
+}
+
+.tableBody td {
+  padding: 1rem 1.5rem; /* px-6 py-4 */
+  vertical-align: middle;
+  font-size: 0.875rem; /* text-sm */
+  color: var(--color-text-light);
+  white-space: nowrap;
+  border-left: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+}
+
+/* TAMBAH: selector untuk td pertama agar tidak ada border ganda */
+.tableBody td:first-child {
+  border-left: none;
+}
+
+.tableBody .cellTitle {
+  font-weight: 600;
+  color: var(--color-text-dark); /* Cokelat Kayu */
+}
+

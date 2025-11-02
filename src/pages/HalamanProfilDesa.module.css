@@ -1,0 +1,234 @@
+/* src/pages/HalamanProfilDesa.module.css */
+
+.pageWrapper {
+  /* Latar belakang halaman (abu-abu sangat muda) */
+  background-color: #f9fafb; 
+}
+
+/* --- Bagian 1: Hero Header --- */
+.hero {
+  position: relative;
+  height: 350px;
+  
+  /* PENTING: Ganti 'hero-desa.jpg' dengan nama file gambar Anda.
+     Tempatkan file gambar tersebut di dalam folder 'public/' 
+     proyek React Anda (sejajar dengan folder 'src/'). */
+  background-image: url('/foto-desa.png');
+  
+  /* Warna cadangan jika gambar gagal dimuat */
+  background-color: #4b5563; /* abu-abu */
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.heroOverlay {
+  /* Lapisan gelap agar teks lebih mudah dibaca */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Hitam transparan 50% */
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2; /* Tampil di atas overlay */
+}
+
+.heroContent h1 {
+  font-size: 2.5rem; /* text-4xl */
+  font-weight: 700;
+  margin: 0;
+}
+
+.heroContent p {
+  font-size: 1.25rem; /* text-xl */
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+/* --- Bagian 2: Konten Utama --- */
+.mainContent {
+  /* Kontainer untuk semua kartu di bawah hero */
+  max-width: 1100px;
+  margin: -60px auto 0 auto; /* Tarik ke atas agar menimpa hero */
+  position: relative;
+  z-index: 3;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.5rem; /* Jarak antar kartu */
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+  padding: 1.5rem;
+  /* --- EFEK INTERAKTIF BARU --- */
+  transition: all 0.3s ease-in-out;
+}
+
+/* --- EFEK INTERAKTIF BARU --- */
+.card:hover {
+  transform: translateY(-5px); /* Sedikit terangkat */
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); /* shadow-lg */
+}
+
+.cardTitle {
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 600; /* font-semibold */
+  color: #111827; /* text-gray-900 */
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.75rem;
+}
+
+.cardSubtitle {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 600;
+  color: #374151; /* text-gray-700 */
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.paragraph {
+  font-size: 1rem;
+  color: #4b5563; /* text-gray-600 */
+  line-height: 1.6;
+  margin: 0;
+}
+
+.list {
+  padding-left: 1.5rem;
+  color: #4b5563;
+  line-height: 1.7;
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+/* --- Kartu Visi Misi --- */
+.visiMisiCard {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 kolom di HP */
+  gap: 2rem;
+}
+
+/* Layar tablet dan lebih besar: 2 kolom */
+@media (min-width: 768px) {
+  .visiMisiCard {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.visi {
+  border-right: none;
+}
+
+/* Garis pemisah di layar besar */
+@media (min-width: 768px) {
+  .visi {
+    border-right: 1px solid #e5e7eb;
+    padding-right: 2rem;
+  }
+}
+
+/* --- Kartu Struktur Organisasi --- */
+.strukturGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.strukturItem {
+  background-color: #f9fafb; /* bg-gray-50 */
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem; /* rounded-md */
+  padding: 1rem;
+  text-align: center;
+  /* --- EFEK INTERAKTIF BARU --- */
+  transition: all 0.3s ease-in-out;
+}
+
+/* --- EFEK INTERAKTIF BARU --- */
+.strukturItem:hover {
+  transform: scale(1.03); /* Sedikit membesar */
+  background-color: #ffffff; /* Latar belakang jadi putih */
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+}
+
+.strukturJabatan {
+  font-weight: 600;
+  color: #111827;
+}
+
+.strukturNama {
+  font-size: 0.875rem; /* text-sm */
+  color: #2563eb; /* text-blue-600 */
+  margin-top: 0.25rem;
+}
+
+/* --- Bagian 3: Footer --- */
+.footer {
+  background-color: #1f2937; /* bg-gray-800 */
+  color: #d1d5db; /* text-gray-300 */
+  padding: 3rem 1.5rem;
+  margin-top: 2rem;
+}
+
+.footerTitle {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+}
+
+.layananGrid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.layananItem {
+  background-color: #374151; /* bg-gray-700 */
+  color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  font-weight: 500;
+  transition: all 0.2s ease; /* Ubah 'background-color' menjadi 'all' */
+}
+
+.layananItem:hover {
+  background-color: #4b5563; /* bg-gray-600 */
+  cursor: pointer;
+  /* --- EFEK INTERAKTIF BARU --- */
+  transform: translateY(-5px); /* Terangkat saat di-hover */
+}
+
+.footerCopy {
+  text-align: center;
+  font-size: 0.875rem; /* text-sm */
+  color: #9ca3af; /* text-gray-400 */
+  border-top: 1px solid #4b5563;
+  padding-top: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
