@@ -20,7 +20,7 @@ const DashboardMasyarakat = () => {
     },
     {
       id: 3,
-      judul: 'si jaki korupsi',
+      judul: 'pak jaki korupsi',
       status: 'ditolak',
       alasan_penolakan: 'Pemerintah bersama rakyat ga mungkin korupsi!'
     }

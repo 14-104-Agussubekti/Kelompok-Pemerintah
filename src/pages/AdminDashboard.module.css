@@ -64,10 +64,10 @@
 
 .tableBody td {
   padding: 1rem 1.5rem; /* px-6 py-4 */
-  vertical-align: middle;
+  vertical-align: top; /* Diubah dari 'middle' agar align ke atas */
   font-size: 0.875rem; /* text-sm */
   color: var(--color-text-light);
-  white-space: nowrap;
+  /* 'white-space: nowrap' DIHAPUS agar bisa wrap */
   border-left: 1px solid var(--color-border-medium);
 }
 
@@ -81,12 +81,30 @@
   white-space: normal; /* Biarkan judul panjang wrap */
 }
 
+/* --- STYLE BARU UNTUK SEL YANG TIDAK BOLEH WRAP --- */
+.cellNowrap {
+  white-space: nowrap;
+}
+
+/* --- STYLE BARU UNTUK ALASAN PENOLAKAN DI TABEL --- */
+.rejectionReasonInTable {
+  font-size: 0.8rem;
+  color: var(--color-danger); /* Warna merah */
+  font-style: italic;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  white-space: normal;
+}
+
+
 /* --- STYLE BARU UNTUK AKSI --- */
 .actionCell {
   display: flex;
   gap: 0.5rem;
   align-items: center;
   flex-wrap: wrap; /* Agar tombol pindah ke bawah jika tidak cukup */
+  /* Terapkan 'nowrap' di sini agar sel aksi tidak wrap */
+  white-space: nowrap; 
 }
 
 .statusSelect {

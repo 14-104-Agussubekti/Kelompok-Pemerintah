@@ -34,12 +34,12 @@ const AdminDashboard = () => {
     },
     { 
       id: 4, 
-      judul: 'Permintaan Fogging DBD', 
+      judul: 'pak jaki korupsi', 
       status: 'ditolak',
       pelapor: 'Warga D', 
-      isi: 'Permintaan fogging karena ada yang terkena DBD.', 
+      isi: 'Turunkan jokowi', 
       foto_bukti: null,
-      alasan_penolakan: 'Area Anda sudah masuk jadwal fogging rutin minggu depan.' // Contoh alasan
+      alasan_penolakan: 'Pemerintah bersama rakyat ga mungkin korupsi!' // Contoh alasan
     },
   ]);
 
@@ -77,6 +77,7 @@ const AdminDashboard = () => {
   // --- Fungsi baru untuk submit penolakan dari modal ---
   const handleSubmitRejection = () => {
     if (rejectionReason.trim() === '') {
+      // Ganti alert dengan metode notifikasi yang lebih baik jika ada
       alert('Alasan penolakan tidak boleh kosong.');
       return;
     }
@@ -178,8 +179,20 @@ const AdminDashboard = () => {
               {pengaduan.map(p => (
                 <tr key={p.id}>
                   <td className={styles.cellTitle}>{p.judul}</td>
-                  <td>{p.pelapor}</td>
-                  <td><StatusBadge status={p.status} /></td>
+                  {/* Tambahkan style 'cellNowrap' agar nama pelapor tidak wrap */}
+                  <td className={styles.cellNowrap}>{p.pelapor}</td>
+                  
+                  {/* Sel status tidak lagi 'nowrap' dan bisa menampilkan alasan */}
+                  <td>
+                    <StatusBadge status={p.status} />
+                    {/* Tampilkan alasan penolakan jika status 'ditolak' */}
+                    {p.status === 'ditolak' && p.alasan_penolakan && (
+                      <p className={styles.rejectionReasonInTable}>
+                        {p.alasan_penolakan}
+                      </p>
+                    )}
+                  </td>
+                  
                   <td className={styles.actionCell}>
                     {renderAksi(p)}
                   </td>
@@ -276,3 +289,4 @@ const AdminDashboard = () => {
   );
 };
 export default AdminDashboard;
+
