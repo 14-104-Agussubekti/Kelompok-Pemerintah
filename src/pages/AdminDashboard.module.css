@@ -86,6 +86,7 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  flex-wrap: wrap; /* Agar tombol pindah ke bawah jika tidak cukup */
 }
 
 .statusSelect {
@@ -101,11 +102,22 @@
   /* Kita buat sedikit lebih kecil */
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
-  background-color: var(--color-accent-light); /* Hijau Segar */
+  background-color: var(--color-border-medium); /* Warna Cokelat Jerami netral */
   color: var(--color-text-dark);
 }
 .actionButton:hover {
   opacity: 0.8;
+}
+
+/* --- STYLE BARU UNTUK TOMBOL TERIMA / TOLAK --- */
+.actionButtonTerima {
+  background-color: var(--color-accent-light); /* Hijau Segar */
+  color: var(--color-text-dark);
+}
+
+.actionButtonTolak {
+  background-color: var(--color-danger); /* Merah */
+  color: var(--color-text-inverse); /* Putih */
 }
 
 
@@ -192,3 +204,57 @@
   border: 1px solid var(--color-border-light);
   margin-top: 0.5rem;
 }
+
+/* --- STYLE BARU UNTUK ALASAN PENOLAKAN --- */
+.rejectionInfo {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--color-bg-main);
+  border: 1px solid var(--color-danger);
+  border-radius: 8px;
+}
+
+.rejectionInfo strong {
+  color: var(--color-danger);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.rejectionInfo p {
+  color: var(--color-text-medium);
+  margin: 0;
+}
+
+/* --- STYLE BARU UNTUK MODAL PENOLAKAN --- */
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.modalButton {
+  /* Menggunakan style tombol global dari index.css */
+  padding: 0.6rem 1.2rem;
+  font-size: 0.875rem;
+  background-color: var(--color-border-medium);
+  color: var(--color-text-dark);
+}
+
+.modalButtonDanger {
+  background-color: var(--color-danger);
+  color: var(--color-text-inverse);
+}
+.modalButtonDanger:hover {
+  opacity: 0.8;
+}
+
+.rejectionTextarea {
+  /* Menggunakan style input global dari index.css */
+  width: 100%;
+  min-height: 100px;
+  margin-top: 0.5rem;
+}
+

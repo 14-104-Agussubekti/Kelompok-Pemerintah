@@ -9,7 +9,7 @@
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   padding: 2rem;
   width: 100%;
-  border: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+  border: 1px solid var(--color-border-medium);
 }
 
 .title {
@@ -18,24 +18,12 @@
   margin-bottom: 2rem;
   color: var(--color-text-dark); /* Cokelat Kayu */
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+  border-bottom: 1px solid var(--color-border-medium);
 }
-
-/* Menghapus style .list dan .item yang lama */
-
-.emptyText {
-  color: var(--color-text-light);
-  text-align: center;
-  padding: 2rem;
-  font-style: italic;
-}
-
-/* --- STYLE TABEL BARU --- */
-/* (Mirip dengan AdminDashboard.module.css) */
 
 .tableWrapper {
   overflow: hidden; 
-  border: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+  border: 1px solid var(--color-border-medium);
   border-radius: 8px;
 }
 
@@ -56,11 +44,10 @@
   color: var(--color-text-medium);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  border-bottom: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
-  border-left: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+  border-bottom: 1px solid var(--color-border-medium);
+  border-left: 1px solid var(--color-border-medium);
 }
 
-/* TAMBAH: selector untuk th pertama agar tidak ada border ganda */
 .tableHead th:first-child {
   border-left: none;
 }
@@ -69,7 +56,7 @@
   background-color: var(--color-bg-card);
 }
 .tableBody tr {
-  border-bottom: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+  border-bottom: 1px solid var(--color-border-medium);
 }
 .tableBody tr:last-child {
   border-bottom: none;
@@ -77,14 +64,13 @@
 
 .tableBody td {
   padding: 1rem 1.5rem; /* px-6 py-4 */
-  vertical-align: middle;
+  vertical-align: top; /* Diubah dari 'middle' agar align ke atas */
   font-size: 0.875rem; /* text-sm */
   color: var(--color-text-light);
-  white-space: nowrap;
-  border-left: 1px solid var(--color-border-medium); /* <-- DIUBAH: Warna lebih gelap */
+  /* 'white-space: nowrap' DIHAPUS agar bisa wrap */
+  border-left: 1px solid var(--color-border-medium);
 }
 
-/* TAMBAH: selector untuk td pertama agar tidak ada border ganda */
 .tableBody td:first-child {
   border-left: none;
 }
@@ -92,5 +78,16 @@
 .tableBody .cellTitle {
   font-weight: 600;
   color: var(--color-text-dark); /* Cokelat Kayu */
+  white-space: normal; /* Biarkan judul panjang wrap */
+}
+
+/* --- STYLE BARU UNTUK ALASAN PENOLAKAN DI TABEL --- */
+.rejectionReasonInTable {
+  font-size: 0.8rem;
+  color: var(--color-danger); /* Warna merah */
+  font-style: italic;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  white-space: normal; /* Pastikan alasan bisa wrap */
 }
 
