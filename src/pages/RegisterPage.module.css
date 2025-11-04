@@ -1,13 +1,19 @@
-.card {
-  max-width: 28rem;
-  margin: auto;
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+/*
+ * File CSS untuk Halaman Register
+ * Kita impor (gunakan ulang) semua style dari Halaman Login
+ * agar tampilannya konsisten.
+ */
+@import './LoginPage.module.css';
+
+/* Semua style seperti .loginWrapper, .loginCard, .form, .input, .submitButton, dll
+  sekarang otomatis tersedia di sini dari file LoginPage.module.css.
+*/
+
+/* --- STYLE BARU UNTUK VALIDASI PASSWORD --- */
+.passwordError {
+  font-size: 0.8rem;
+  color: var(--color-danger); /* Warna merah */
+  margin-top: 0.25rem;
+  margin-bottom: 0;
 }
-/* ... (sisa kode CSS) ... */
-.text {
-  text-align: center;
-  color: #4b5563; /* text-gray-600 */
-}
+

@@ -1,25 +1,24 @@
 /*
- * File CSS untuk Halaman Login.
- * Menggunakan variabel dari src/index.css
+ * File CSS untuk Halaman Login
+ * Disederhanakan untuk menghapus 'Lupa Password'
  */
 
 .loginWrapper {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 3rem 1rem; /* Beri jarak dari navbar/footer */
+  justify-content: center;
   width: 100%;
+  padding: 3rem 1rem; /* Beri padding atas/bawah */
 }
 
 .loginCard {
-  background: var(--color-bg-card);
-  border-radius: 12px;
-  /* Bayangan yang lembut */
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  padding: 2.5rem;
-  max-width: 450px;
   width: 100%;
-  border: 1px solid var(--color-border-light);
+  max-width: 450px;
+  background: var(--color-bg-card);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--color-border-medium);
 }
 
 .header {
@@ -30,56 +29,45 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--color-text-dark); /* Cokelat Kayu */
+  color: var(--color-text-dark);
+  margin: 0;
 }
 
 .subtitle {
   font-size: 1rem;
-  color: var(--color-text-light); /* Teks abu-abu/cokelat muda */
+  color: var(--color-text-light);
   margin-top: 0.5rem;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Jarak antar grup input */
-}
-
-.error {
-  color: var(--color-danger);
-  background: var(--color-danger-bg);
-  padding: 0.75rem;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 500;
+  gap: 1.25rem;
 }
 
 .inputGroup {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .label {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-text-medium);
-  margin-bottom: 0.5rem;
 }
 
 .input {
-  /* Style dasar sudah ada di index.css, kita hanya sesuaikan sedikit */
-  font-size: 1rem;
-  background-color: var(--color-bg-main); /* Latar input = latar body */
-}
-.input:focus {
-  border-color: var(--color-primary); /* Biru Langit saat fokus */
-  box-shadow: 0 0 0 3px var(--color-primary-bg); /* Efek glow biru muda */
+  /* Menggunakan style input global dari index.css */
+  margin-top: 0; /* Override style global */
 }
 
+/* --- DIPERBARUI --- */
+/* Kita ubah dari 'space-between' menjadi 'flex-start' */
+/* agar 'Remember me' tetap di kiri */
 .formExtras {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start; /* <-- Diubah dari space-between */
   align-items: center;
   font-size: 0.875rem;
 }
@@ -91,47 +79,69 @@
 }
 
 .checkbox {
+  /* Hapus style default */
+  appearance: none;
+  -webkit-appearance: none;
   width: 16px;
   height: 16px;
-  accent-color: var(--color-primary); /* Warna centang jadi Biru Langit */
+  border: 2px solid var(--color-border-medium);
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+.checkbox:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+/* Tambahkan tanda centang */
+.checkbox:checked::after {
+  content: '✔';
+  font-size: 12px;
+  color: var(--color-text-inverse);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .checkboxLabel {
-  color: var(--color-text-medium);
+  color: var(--color-text-light);
+  cursor: pointer;
 }
 
 .link {
-  color: var(--color-primary); /* Biru Langit */
+  color: var(--color-primary);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
 }
 .link:hover {
   text-decoration: underline;
 }
 
 .submitButton {
-  background: var(--color-primary); /* Biru Langit */
-  color: white;
+  /* Menggunakan style tombol global dari index.css */
+  padding: 0.75rem;
   font-size: 1rem;
-  font-weight: 600;
-  padding: 0.85rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
 }
 .submitButton:hover {
-  background: var(--color-primary-dark); /* Biru Langit lebih gelap */
+  background-color: var(--color-primary-dark);
 }
-
-/* STYLE UNTUK .divider, .socialLogin, .googleButton, dan .appleButton
-  TELAH DIHAPUS DARI SINI KARENA SUDAH TIDAK DIGUNAKAN.
-*/
 
 .signupText {
   text-align: center;
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: var(--color-text-medium);
+  margin-top: 1.5rem;
+  color: var(--color-text-light);
+  font-size: 0.875rem;
 }
 
+.error {
+  color: var(--color-danger);
+  background-color: var(--color-bg-main);
+  border: 1px solid var(--color-danger);
+  padding: 0.75rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.875rem;
+}

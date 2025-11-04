@@ -46,6 +46,7 @@
   letter-spacing: 0.05em;
   border-bottom: 1px solid var(--color-border-medium);
   border-left: 1px solid var(--color-border-medium);
+  white-space: nowrap; /* Agar header tidak wrap */
 }
 
 .tableHead th:first-child {
@@ -81,9 +82,18 @@
   white-space: normal; /* Biarkan judul panjang wrap */
 }
 
-/* --- STYLE BARU UNTUK SEL YANG TIDAK BOLEH WRAP --- */
-.cellNowrap {
-  white-space: nowrap;
+/* --- STYLE BARU UNTUK SEL WAKTU --- */
+.cellWaktu {
+  font-style: italic;
+  color: var(--color-text-medium);
+  white-space: nowrap; /* Agar waktu tidak wrap */
+}
+
+/* --- STYLE BARU UNTUK SEL LOKASI --- */
+.cellLokasi {
+  white-space: normal; /* Biarkan lokasi wrap jika panjang */
+  color: var(--color-text-medium);
+  min-width: 150px; /* Beri lebar minimum */
 }
 
 /* --- STYLE BARU UNTUK ALASAN PENOLAKAN DI TABEL --- */
@@ -97,14 +107,13 @@
 }
 
 
-/* --- STYLE BARU UNTUK AKSI --- */
+/* --- STYLE UNTUK AKSI --- */
 .actionCell {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  flex-wrap: wrap; /* Agar tombol pindah ke bawah jika tidak cukup */
-  /* Terapkan 'nowrap' di sini agar sel aksi tidak wrap */
-  white-space: nowrap; 
+  flex-wrap: wrap; 
+  white-space: nowrap;
 }
 
 .statusSelect {
@@ -127,7 +136,7 @@
   opacity: 0.8;
 }
 
-/* --- STYLE BARU UNTUK TOMBOL TERIMA / TOLAK --- */
+/* --- STYLE UNTUK TOMBOL TERIMA / TOLAK --- */
 .actionButtonTerima {
   background-color: var(--color-accent-light); /* Hijau Segar */
   color: var(--color-text-dark);
@@ -139,7 +148,7 @@
 }
 
 
-/* --- STYLE BARU UNTUK MODAL --- */
+/* --- STYLE UNTUK MODAL DETAIL --- */
 .modalOverlay {
   position: fixed;
   top: 0;
@@ -223,7 +232,7 @@
   margin-top: 0.5rem;
 }
 
-/* --- STYLE BARU UNTUK ALASAN PENOLAKAN --- */
+/* --- STYLE UNTUK ALASAN PENOLAKAN DI MODAL DETAIL --- */
 .rejectionInfo {
   margin-top: 1.5rem;
   padding: 1rem;
@@ -244,35 +253,45 @@
 }
 
 /* --- STYLE BARU UNTUK MODAL PENOLAKAN --- */
+.rejectionLabel {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.rejectionTextarea {
+  /* Menggunakan style input global dari index.css */
+  margin-top: 0;
+  width: 100%;
+  min-height: 100px;
+}
+
 .modalFooter {
   display: flex;
   justify-content: flex-end;
-  gap: 0.5rem;
+  gap: 0.75rem;
   margin-top: 1.5rem;
   padding-top: 1rem;
   border-top: 1px solid var(--color-border-light);
 }
 
-.modalButton {
+.modalButtonCancel {
   /* Menggunakan style tombol global dari index.css */
-  padding: 0.6rem 1.2rem;
-  font-size: 0.875rem;
-  background-color: var(--color-border-medium);
-  color: var(--color-text-dark);
+  background-color: transparent;
+  color: var(--color-text-light);
+  border: 1px solid var(--color-border-light);
+}
+.modalButtonCancel:hover {
+  background-color: var(--color-bg-main);
 }
 
-.modalButtonDanger {
+.modalButtonSubmitTolak {
+  /* Menggunakan style tombol global dari index.css */
   background-color: var(--color-danger);
   color: var(--color-text-inverse);
 }
-.modalButtonDanger:hover {
+.modalButtonSubmitTolak:hover {
   opacity: 0.8;
 }
-
-.rejectionTextarea {
-  /* Menggunakan style input global dari index.css */
-  width: 100%;
-  min-height: 100px;
-  margin-top: 0.5rem;
-}
-

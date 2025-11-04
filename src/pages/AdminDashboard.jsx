@@ -3,7 +3,8 @@ import StatusBadge from '../components/common/StatusBadge';
 import styles from './AdminDashboard.module.css';
 
 const AdminDashboard = () => {
-  // --- Data Mockup Diperbarui dengan 'alasan_penolakan' ---
+  // --- Data Mockup Diperbarui ---
+  // Menambahkan 'waktu_dibuat'
   const [pengaduan, setPengaduan] = useState([
     { 
       id: 1, 
@@ -12,7 +13,9 @@ const AdminDashboard = () => {
       pelapor: 'Warga A', 
       isi: 'Jalanan di depan rumah saya (RT 01/RW 05) rusak parah...', 
       foto_bukti: 'https://placehold.co/600x400/ccc/999?text=Contoh+Foto+Jalan+Rusak',
-      alasan_penolakan: null 
+      lokasi: 'Depan rumah saya (RT 01/RW 05)',
+      alasan_penolakan: null,
+      waktu_dibuat: '4 Nov 2025, 15:01' // <-- BARU
     },
     { 
       id: 2, 
@@ -21,7 +24,9 @@ const AdminDashboard = () => {
       pelapor: 'Warga B', 
       isi: 'Lampu jalan di pertigaan utama desa sudah mati 3 hari...', 
       foto_bukti: null,
-      alasan_penolakan: null 
+      lokasi: 'Pertigaan utama desa',
+      alasan_penolakan: null,
+      waktu_dibuat: '3 Nov 2025, 09:30' // <-- BARU
     },
     { 
       id: 3, 
@@ -30,62 +35,68 @@ const AdminDashboard = () => {
       pelapor: 'Warga C', 
       isi: 'Saya ingin melaporkan bahwa bantuan sosial (sembako) ...', 
       foto_bukti: null,
-      alasan_penolakan: null 
+      lokasi: 'Balai Warga RW 02',
+      alasan_penolakan: null,
+      waktu_dibuat: '3 Nov 2025, 08:15' // <-- BARU
     },
     { 
       id: 4, 
-      judul: 'pak jaki korupsi', 
+      judul: 'Permintaan Fogging DBD', 
       status: 'ditolak',
       pelapor: 'Warga D', 
-      isi: 'Turunkan jokowi', 
+      isi: 'Permintaan fogging karena ada yang terkena DBD.', 
       foto_bukti: null,
-      alasan_penolakan: 'Pemerintah bersama rakyat ga mungkin korupsi!' // Contoh alasan
+      lokasi: 'Area RT 03',
+      alasan_penolakan: 'Area Anda sudah masuk jadwal fogging rutin minggu depan.',
+      waktu_dibuat: '1 Nov 2025, 11:15' // <-- BARU
     },
   ]);
 
   const [selectedPengaduan, setSelectedPengaduan] = useState(null);
   
-  // --- State Baru untuk Modal Penolakan ---
-  const [currentRejection, setCurrentRejection] = useState(null); // Menyimpan ID pengaduan yang akan ditolak
-  const [rejectionReason, setRejectionReason] = useState(''); // Menyimpan isi textarea
+  // --- STATE BARU UNTUK MODAL PENOLAKAN ---
+  const [rejectionModalOpen, setRejectionModalOpen] = useState(false);
+  const [currentRejection, setCurrentRejection] = useState({ id: null, alasan: '' });
 
-  // --- FUNGSI HANDLER BARU ---
-  const handleStatusChange = (id, newStatus, alasan = null) => {
-    // Memperbarui state, sekarang juga menyimpan alasan
+  // --- FUNGSI HANDLER ---
+  const handleStatusChange = (id, newStatus) => {
     setPengaduan(prev =>
-      prev.map(p =>
-        (p.id === id ? { ...p, status: newStatus, alasan_penolakan: alasan } : p)
-      )
+      prev.map(p => (p.id === id ? { ...p, status: newStatus } : p))
     );
   };
 
   const handleTerima = (id) => {
-    handleStatusChange(id, 'tertunda', null); // Set alasan ke null saat diterima
+    handleStatusChange(id, 'tertunda');
   };
 
-  // --- Mengubah 'handleTolak' menjadi 'handleBukaModalTolak' ---
-  const handleBukaModalTolak = (pengaduan) => {
-    setCurrentRejection(pengaduan); // Simpan seluruh data pengaduan
-    setRejectionReason(''); // Kosongkan textarea
+  // --- FUNGSI DIPERBARUI ---
+  const handleBukaModalTolak = (id) => {
+    setCurrentRejection({ id: id, alasan: '' });
+    setRejectionModalOpen(true);
   };
-
+  
   const handleTutupModalTolak = () => {
-    setCurrentRejection(null);
-    setRejectionReason('');
+    setRejectionModalOpen(false);
+    setCurrentRejection({ id: null, alasan: '' });
   };
-
-  // --- Fungsi baru untuk submit penolakan dari modal ---
-  const handleSubmitRejection = () => {
-    if (rejectionReason.trim() === '') {
-      // Ganti alert dengan metode notifikasi yang lebih baik jika ada
+  
+  const handleSubmitRejection = (e) => {
+    e.preventDefault();
+    const { id, alasan } = currentRejection;
+    if (alasan.trim() === '') {
       alert('Alasan penolakan tidak boleh kosong.');
       return;
     }
-    handleStatusChange(currentRejection.id, 'ditolak', rejectionReason);
+    
+    // Perbarui state pengaduan dengan status 'ditolak' dan alasannya
+    setPengaduan(prev =>
+      prev.map(p => (p.id === id ? { ...p, status: 'ditolak', alasan_penolakan: alasan } : p))
+    );
+    
+    console.log(`MOCK REJECT: ID ${id}, Alasan: ${alasan}`);
     handleTutupModalTolak();
   };
 
-  // --- Handler Modal Detail (Tidak berubah) ---
   const handleBukaDetail = (pengaduan) => {
     setSelectedPengaduan(pengaduan);
   };
@@ -94,7 +105,6 @@ const AdminDashboard = () => {
     setSelectedPengaduan(null);
   };
 
-  // --- FUNGSI RENDER AKSI (Diperbarui) ---
   const renderAksi = (pengaduan) => {
     switch (pengaduan.status) {
       case 'menunggu_persetujuan':
@@ -108,7 +118,7 @@ const AdminDashboard = () => {
             </button>
             <button 
               className={`${styles.actionButton} ${styles.actionButtonTolak}`}
-              onClick={() => handleBukaModalTolak(pengaduan)} // <-- Diperbarui
+              onClick={() => handleBukaModalTolak(pengaduan.id)} // <-- Diperbarui
             >
               Tolak
             </button>
@@ -170,7 +180,9 @@ const AdminDashboard = () => {
             <thead className={styles.tableHead}>
               <tr>
                 <th>Judul</th>
+                <th>Waktu Dibuat</th> {/* <-- KOLOM BARU */}
                 <th>Pelapor</th>
+                <th>Lokasi</th>
                 <th>Status</th>
                 <th>Aksi</th>
               </tr>
@@ -179,20 +191,20 @@ const AdminDashboard = () => {
               {pengaduan.map(p => (
                 <tr key={p.id}>
                   <td className={styles.cellTitle}>{p.judul}</td>
-                  {/* Tambahkan style 'cellNowrap' agar nama pelapor tidak wrap */}
-                  <td className={styles.cellNowrap}>{p.pelapor}</td>
                   
-                  {/* Sel status tidak lagi 'nowrap' dan bisa menampilkan alasan */}
+                  {/* --- SEL BARU UNTUK WAKTU --- */}
+                  <td className={styles.cellWaktu}>{p.waktu_dibuat}</td>
+                  
+                  <td>{p.pelapor}</td>
+                  <td className={styles.cellLokasi}>{p.lokasi}</td>
                   <td>
                     <StatusBadge status={p.status} />
-                    {/* Tampilkan alasan penolakan jika status 'ditolak' */}
                     {p.status === 'ditolak' && p.alasan_penolakan && (
                       <p className={styles.rejectionReasonInTable}>
                         {p.alasan_penolakan}
                       </p>
                     )}
                   </td>
-                  
                   <td className={styles.actionCell}>
                     {renderAksi(p)}
                   </td>
@@ -203,7 +215,7 @@ const AdminDashboard = () => {
         </div>
       </div>
 
-      {/* --- MODAL DETAIL (Diperbarui) --- */}
+      {/* --- MODAL DETAIL --- */}
       {selectedPengaduan && (
         <div className={styles.modalOverlay} onClick={handleTutupModal}>
           <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
@@ -214,17 +226,13 @@ const AdminDashboard = () => {
               </button>
             </div>
             <div className={styles.modalBody}>
-              <p><strong>Pelapor:</strong> {selectedPengaduan.pelapor}</p>
-              <p><strong>Status:</strong> <StatusBadge status={selectedPengaduan.status} /></p>
               
-              {/* --- BARU: Menampilkan Alasan Penolakan --- */}
-              {selectedPengaduan.status === 'ditolak' && selectedPengaduan.alasan_penolakan && (
-                <div className={styles.rejectionInfo}>
-                  <strong>Alasan Penolakan:</strong>
-                  <p>{selectedPengaduan.alasan_penolakan}</p>
-                </div>
-              )}
-
+              {/* --- INFO WAKTU DITAMBAHKAN DI MODAL --- */}
+              <p><strong>Waktu Dibuat:</strong> {selectedPengaduan.waktu_dibuat}</p>
+              
+              <p><strong>Pelapor:</strong> {selectedPengaduan.pelapor}</p>
+              <p><strong>Lokasi:</strong> {selectedPengaduan.lokasi}</p>
+              <p><strong>Status:</strong> <StatusBadge status={selectedPengaduan.status} /></p>
               <hr className={styles.modalDivider} />
               <p><strong>Isi Laporan:</strong></p>
               <p>{selectedPengaduan.isi}</p>
@@ -239,50 +247,50 @@ const AdminDashboard = () => {
                   />
                 </div>
               )}
+
+              {selectedPengaduan.status === 'ditolak' && selectedPengaduan.alasan_penolakan && (
+                <div className={styles.rejectionInfo}>
+                  <strong>Alasan Penolakan:</strong>
+                  <p>{selectedPengaduan.alasan_penolakan}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
       )}
 
-      {/* --- MODAL PENOLAKAN (BARU) --- */}
-      {currentRejection && (
+      {/* --- MODAL PENOLAKAN --- */}
+      {rejectionModalOpen && (
         <div className={styles.modalOverlay} onClick={handleTutupModalTolak}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+          <form className={styles.modalContent} onClick={(e) => e.stopPropagation()} onSubmit={handleSubmitRejection}>
             <div className={styles.modalHeader}>
               <h2 className={styles.modalTitle}>Tolak Pengaduan</h2>
-              <button className={styles.modalCloseButton} onClick={handleTutupModalTolak}>
+              <button type="button" className={styles.modalCloseButton} onClick={handleTutupModalTolak}>
                 &times;
               </button>
             </div>
             <div className={styles.modalBody}>
-              <p>Anda akan menolak pengaduan: <strong>"{currentRejection.judul}"</strong>.</p>
-              <label htmlFor="rejectionReason" style={{ fontWeight: 600, color: 'var(--color-text-dark)' }}>
-                Berikan alasan penolakan (Wajib):
+              <label htmlFor="alasan" className={styles.rejectionLabel}>
+                Mohon masukkan alasan penolakan:
               </label>
               <textarea
-                id="rejectionReason"
-                className={styles.rejectionTextarea}
-                value={rejectionReason}
-                onChange={(e) => setRejectionReason(e.target.value)}
+                id="alasan"
                 rows="4"
-                placeholder="Contoh: Pengaduan di luar wewenang desa, bukti tidak cukup, dll."
+                className={styles.rejectionTextarea}
+                value={currentRejection.alasan}
+                onChange={(e) => setCurrentRejection(prev => ({ ...prev, alasan: e.target.value }))}
+                required
               />
             </div>
             <div className={styles.modalFooter}>
-              <button 
-                className={styles.modalButton} 
-                onClick={handleTutupModalTolak}
-              >
+              <button type="button" className={styles.modalButtonCancel} onClick={handleTutupModalTolak}>
                 Batal
               </button>
-              <button 
-                className={`${styles.modalButton} ${styles.modalButtonDanger}`}
-                onClick={handleSubmitRejection}
-              >
+              <button type="submit" className={styles.modalButtonSubmitTolak}>
                 Kirim Penolakan
               </button>
             </div>
-          </div>
+          </form>
         </div>
       )}
     </>
