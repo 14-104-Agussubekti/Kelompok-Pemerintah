@@ -3,8 +3,6 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import styles from './LoginPage.module.css';
 
-// Ikon SVG GoogleLogo dan AppleLogo telah dihapus dari sini
-
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -71,6 +69,8 @@ const LoginPage = () => {
             />
           </div>
 
+          {/* --- BAGIAN INI DIPERBARUI --- */}
+          {/* Link 'Lupa Password' telah dihapus */}
           <div className={styles.formExtras}>
             <div className={styles.checkboxWrapper}>
               <input
@@ -84,9 +84,7 @@ const LoginPage = () => {
                 Remember me
               </label>
             </div>
-            <Link to="/lupa-password" className={styles.link}>
-              Lupa Password?
-            </Link>
+            {/* Link yang dihapus sebelumnya ada di sini */}
           </div>
 
           <button
@@ -97,8 +95,6 @@ const LoginPage = () => {
             {loading ? 'Loading...' : 'Login'}
           </button>
         </form>
-
-        {/* Divider (OR) dan Tombol .socialLogin telah dihapus dari sini */}
 
         <p className={styles.signupText}>
           Belum punya akun?{' '}
